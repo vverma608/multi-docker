@@ -1,0 +1,42 @@
+{
+
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [ 
+        {
+            "name": "client",
+            "image": "vverma/multi-client",
+            "hostname": "client",
+            "essential": "false"
+
+        },
+        {
+            "name": "server",
+            "image": "vverma/multi-server",
+            "hostname": "api",
+            "essential": "false"
+
+        },
+        {
+            "name": "worker",
+            "image": "vverma/multi-worker",
+            "hostname": "worker",
+            "essential": "false"
+
+        },
+        {
+            "name": "nginx",
+            "image": "vverma/multi-nginx",
+            "hostname": "worker",
+            "essential": "true",
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+
+
+}
